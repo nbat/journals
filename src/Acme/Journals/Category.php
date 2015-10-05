@@ -2,36 +2,60 @@
 
 namespace Acme\Journals;
 
-use ArrayObject;
-
 class Category
 {
-    protected $_name;
+    protected $id;
+    protected $name = '';
+    protected $slug;
 
-    protected $_articles;
+    protected $articles;
 
     function __construct()
     {
-        $this->_articles = new ArrayObject(array());
     }
 
     public function getArticles()
     {
-        return $this->_articles;
+        return $this->articles;
     }
 
     public function setArticles($articles)
     {
-        $this->_articles = $articles;
+        $this->articles = $articles;
+    }
+
+    public function getId()
+    {
+        return $this->name;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    public function __toString()
+    {
+        return $this->GetName();
     }
 }

@@ -4,26 +4,26 @@ namespace Acme\Journals;
 
 class Comment
 {
-    protected $_text;
-    protected $_date;
+    protected $text;
+    protected $date;
 
     public function getText()
     {
-        return $this->_text;
+        return $this->text;
     }
 
     public function setText($text)
     {
-        $this->_text = $text;
+        $this->text = $text;
     }
 
     public function getDate()
     {
-        return $this->_date;
+        return $this->date;
     }
 
     public function setDate($date)
     {
-        $this->_date = $date;
+        $this->date = $date;
     }
 }

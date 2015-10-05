@@ -2,95 +2,122 @@
 
 namespace Acme\Journals;
 
+use Acme\System\Utility;
 use ArrayObject;
 
 class Article
 {
-    protected $_title;
-    protected $_shortDescription;
-    protected $_content;
-    protected $_price;
+    protected $id;
 
-    protected $_category;
-    protected $_authors;
-    protected $_tags;
-    protected $_comments;
+    protected $title;
+    protected $shortDescription;
+    protected $content;
+    protected $price;
+    protected $slug;
+
+    protected $category;
+    protected $authors;
+    protected $tags;
+    protected $comments;
 
     function __construct()
     {
-        $this->_category = new Category();
-        $this->_authors = new ArrayObject(array());
-        $this->_tags = new ArrayObject(array());
-        $this->_comments = new ArrayObject(array());
+        $this->category = new Category();
+        $this->authors = new ArrayObject(array());
+        $this->tags = new ArrayObject(array());
+        $this->comments = new ArrayObject(array());
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getTags()
     {
-        return $this->_tags;
+        return $this->tags;
     }
 
     public function setTags($tags)
     {
-        $this->_tags = $tags;
+        $this->tags = $tags;
     }
 
     public function getCategory()
     {
-        return $this->_category;
+        return $this->category;
     }
 
     public function setCategory(Category $category)
     {
-        $this->_category = $category;
+        $this->category = $category;
     }
 
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     public function setTitle($title)
     {
-        $this->_title = $title;
+        $this->title = $title;
+        $this->setSlug();
     }
+
+    public function setSlug()
+    {
+       $this->slug = Utility::CreateSlug($this->getTitle());
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
 
     public function getShortDescription()
     {
-        return $this->_shortDescription;
+        return $this->shortDescription;
     }
 
     public function setShortDescription($shortDescription)
     {
-        $this->_shortDescription = $shortDescription;
+        $this->shortDescription = $shortDescription;
     }
 
     public function getContent()
     {
-        return $this->_content;
+        return $this->content;
     }
 
     public function setContent($content)
     {
-        $this->_content = $content;
+        $this->content = $content;
     }
 
     public function getPrice()
     {
-        return $this->_price;
+        return $this->price;
     }
 
     public function setPrice($price)
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     public function addAuthor(Author $author)
     {
-        $this->_authors[] = $author;
+        $this->authors[] = $author;
     }
 
     public function getAuthors()
     {
-        return $this->_authors;
+        return $this->authors;
     }
 }

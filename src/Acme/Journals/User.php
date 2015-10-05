@@ -7,43 +7,43 @@ use ArrayObject;
 class User extends \Acme\System\User
 {
 
-    protected $_wallet;
-    protected $_comments;
-    protected $_purchased;
+    protected $wallet;
+    protected $comments;
+    protected $purchased;
 
     function __construct()
     {
-        $this->_comments = new ArrayObject(array());
-        $this->_purchased = new ArrayObject(array());
+        $this->comments = new ArrayObject(array());
+        $this->purchased = new ArrayObject(array());
     }
 
     public function getPurchases()
     {
-        return $this->_purchased;
+        return $this->purchased;
     }
 
     public function setPurchases($purchases)
     {
-        $this->_purchased = $purchases;
+        $this->purchased = $purchases;
     }
 
     public function getComments()
     {
-        return $this->_comments;
+        return $this->comments;
     }
 
     public function setComments($comments)
     {
-        $this->_comments = $comments;
+        $this->comments = $comments;
     }
 
     public function getWallet()
     {
-        return $this->_wallet;
+        return $this->wallet;
     }
 
     public function setWallet($wallet)
     {
-        $this->_wallet = $wallet;
+        $this->wallet = $wallet;
     }
 }

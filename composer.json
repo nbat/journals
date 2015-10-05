@@ -6,5 +6,10 @@
     },
     "autoload": {
         "psr-4": {"Acme\\": "src/Acme"}
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php bin/schema.php -f schema/schema.sql"
+        ]
     }
 }

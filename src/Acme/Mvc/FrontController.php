@@ -2,32 +2,42 @@
 
 namespace Acme\Mvc;
 
+use Acme\DI\DI;
 use Acme\Mvc\Router;
+use Acme\System\Kernel;
 
 class FrontController
 {
-    private $_controller;
-    private $_view;
+    private $model;
+    private $view;
+    private $controller;
 
-    public function __construct(Router $router, $routeName, $action)
+    public function __construct(DI $di, Router $router)
     {
-        $route = $router->getRoute($routeName);
+        $route = $router->Match($_POST, $_SERVER);
+        if ($route !== false) {
+            $modelName = $route->GetModel();
+            $viewName = $route->GetView();
+            $controllerName = $route->GetController();
+            $actionName = $route->GetAction();
+            $actionParams = $route->GetActionParams();
 
-        $modelName = $route->model;
-        $controllerName = $route->controller;
-        $viewName = $route->view;
+            $this->model = $di->create($modelName);
+            $this->controller = $di->create($controllerName);
+            $this->controller->setModel($this->model);
+            $this->view = $di->create($viewName);
+            $this->view->setModel($this->model);
 
-        $model = new $modelName;
-        $this->_controller = new $controllerName($model);
-        $this->_view = new $viewName($routeName, $model);
-
-        if(!empty($action)){
-            $this->_controller->$action();
+            if (!empty($actionName)) $this->controller->{$actionName}($actionParams);
+        } else {
+            $this->model = $di->create("Model");
+            $this->view = $di->create("View");
+            $this->controller = $di->create("Controller");
         }
     }
 
     public function output($twig)
     {
-        return $this->_view->output($twig);
+        return $this->view->output($twig);
     }
 }

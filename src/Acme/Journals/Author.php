@@ -7,55 +7,64 @@ use ArrayObject;
 
 class Author extends User
 {
-    protected $_firstName;
-    protected $_lastName;
-    protected $_about;
-    protected $_articles;
+    protected $firstName;
+    protected $lastName;
+    protected $slug;
+    protected $about;
+    protected $articles;
 
-    function __construct($firstName, $lastName)
+    function __construct()
     {
-        $this->_articles = new ArrayObject(array());
-        $this->setFirstName($firstName);
-        $this->setLastName($lastName);
+
     }
 
     public function getArticles()
     {
-        return $this->_articles;
+        return $this->articles;
     }
 
     public function setArticles($articles)
     {
-        $this->_articles = $articles;
+        $this->articles = $articles;
     }
 
     public function getFirstName()
     {
-        return $this->_firstName;
+        return $this->firstName;
     }
 
     public function setFirstName($firstname)
     {
-        $this->_firstName = $firstname;
+        $this->firstName = $firstname;
     }
 
     public function getLastName()
     {
-        return $this->_lastName;
+        return $this->lastName;
     }
 
     public function setLastName($lastname)
     {
-        $this->_lastName = $lastname;
+        $this->lastName = $lastname;
     }
 
     public function getAbout()
     {
-        return $this->_about;
+        return $this->about;
     }
 
     public function setAbout($about)
     {
-        $this->_about = $about;
+        $this->about = $about;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 }

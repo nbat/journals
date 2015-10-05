@@ -4,13 +4,16 @@ namespace Acme\Mvc;
 
 class View
 {
-    protected $_model;
-    protected $_route;
+    protected $model;
 
-    public function __construct($route, Model $model)
+    public function setModel(Model $m)
     {
-        $this->_route = $route;
-        $this->_model = $model;
+        $this->model = $m;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
     }
 
     public function output($twig)

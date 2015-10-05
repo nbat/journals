@@ -4,26 +4,26 @@ namespace Acme\System;
 
 abstract class User
 {
-    protected $_username;
-    protected $_password;
+    protected $username;
+    protected $password;
 
     public function getUsername()
     {
-        return $this->_username;
+        return $this->username;
     }
 
     public function setUsername($username)
     {
-        $this->_username = $username;
+        $this->username = $username;
     }
 
     public function getPassword()
     {
-        return $this->_password;
+        return $this->password;
     }
 
     public function setPassword()
     {
-        $this->_password;
+        $this->password;
     }
 }

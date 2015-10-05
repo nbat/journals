@@ -4,15 +4,15 @@ namespace Acme\Mvc;
 
 class Controller
 {
-    private $_model;
+    protected $model;
 
-    public function getName()
+    public function setModel(Model $model)
     {
-        return get_class($this);
+        $this->model = $model;
     }
 
-    public function __construct(Model $model)
+    public function getModel()
     {
-        $this->_model = $model;
+        return $this->model;
     }
 }

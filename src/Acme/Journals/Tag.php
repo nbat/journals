@@ -6,32 +6,38 @@ use ArrayObject;
 
 class Tag
 {
-    protected $_name;
+    protected $name;
 
-    protected $_articles;
+    protected $articles;
 
-    function __construct()
+    function __construct($name = "")
     {
-        $this->_articles = new ArrayObject(array());
+        $this->setName($name);
+        $this->articles = new ArrayObject(array());
     }
 
     public function getArticles()
     {
-        return $this->_articles;
+        return $this->articles;
     }
 
     public function setArticles($articles)
     {
-        $this->_articles = $articles;
+        $this->articles = $articles;
     }
 
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

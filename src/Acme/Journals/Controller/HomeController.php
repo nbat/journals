@@ -6,7 +6,7 @@ use Acme\Mvc\Controller;
 
 class HomeController extends Controller
 {
-    public function show()
+    public function show($params)
     {
 
     }

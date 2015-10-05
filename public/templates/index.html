@@ -1,81 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    {% include 'head.html' %}
+
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
+    <title>FNX Journals</title>
 
-    <title>Blog Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
 
-<div class="blog-masthead">
-    <div class="container">
-        <nav class="blog-nav">
-            <a class="blog-nav-item active" href="#">Home</a>
-            <a class="blog-nav-item" href="#">New features</a>
-            <a class="blog-nav-item" href="#">Press</a>
-            <a class="blog-nav-item" href="#">New hires</a>
-            <a class="blog-nav-item" href="#">About</a>
-        </nav>
-    </div>
-</div>
+{% include 'navbar.html' with {'active': 'Artykuly'} %}
 
 <div class="container">
 
     <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+        <h1 class="blog-title">FNX Journals</h1>
+        <p class="lead blog-description">Zadanie rekrutacyjne PHP.</p>
     </div>
-
-
 
 
     <div class="row">
 
-
         <div class="col-sm-8 blog-main">
+
             {% for article in Articles %}
 
             <div class="blog-post">
-                <h2 class="blog-post-title">{{ article.Title }}</h2>
+                <h2 class="blog-post-title"><a href="/artykul/{{ article.Slug }}">{{ article.Title }}</a></h2>
 
-                <p class="blog-post-meta">by {% for author in article.Authors %}<a href="#"> {{ author.FirstName }}  {{ author.LastName }}  </a> {% endfor %}<span class="float-right">{{ article.Price }}</span></p>
+                <div class="blog-post-meta">
+                    przez {% for author in article.Authors %}
+                    <a href="#"> {{ author.FirstName }} {{ author.LastName }} </a>
+                    {% endfor %}
+                        <span class="category">
+                            Kategoria: <a> {{ article.Category }}</a></span>
+                        <span class="tags">
 
-                {{ article.shortDescription }}
+                        </span>
+                </div>
+
+                <div class="blog-post-summary">
+                    {{ article.shortDescription }}
+                </div>
+
+                <div class="blog-post-tags blog-post-row">
+                    {% if article.Tags | length > 0 %}
+                    Tagi: {% for tag in article.Tags %}<span class="tag label label-default">{{ tag }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="blog-post-actions blog-post-row">
+                    <button type="button" class="btn">
+                        {% if article.Price > 0 %}
+                        <span class="price">PLN <strong>{{ article.Price }}-</strong></span>
+                        {% else %}
+                        <span class="price no-price"><strong>Czytaj teraz</strong></span>
+                        {% endif %}
+                    </button>
+                </div>
             </div>
+            <hr>
             <!-- /.blog-post -->
 
             {% endfor %}
-
-            <nav>
-                <ul class="pager">
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </nav>
 
         </div>
         <!-- /.blog-main -->
@@ -88,24 +80,23 @@
                     fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
             </div>
             <div class="sidebar-module">
-                <h4>Archives</h4>
+                <h4>Kategorie</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
+                    {% for cat in Categories %}
+                    <li><a href="/kategorie/{{ cat.Slug }}"> {{ cat.Name }} </a></li>
+                    {% endfor %}
                 </ol>
             </div>
             <div class="sidebar-module">
-                <h4>Elsewhere</h4>
+                <h4>Autory</h4>
+                <ol class="list-unstyled">
+                    {% for a in Authors %}
+                    <li><a href="/autorzy/{{ a.Slug }}"> {{ a.firstName }} {{ a.secondName }} </a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>Tagi</h4>
                 <ol class="list-unstyled">
                     <li><a href="#">GitHub</a></li>
                     <li><a href="#">Twitter</a></li>
@@ -121,21 +112,7 @@
 </div>
 <!-- /.container -->
 
-<footer class="blog-footer">
-    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a
-            href="https://twitter.com/mdo">@mdo</a>.</p>
+{% include 'footer.html' %}
 
-    <p>
-        <a href="#">Back to top</a>
-    </p>
-</footer>
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
