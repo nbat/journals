@@ -58,6 +58,16 @@ class Article
         $this->category = $category;
     }
 
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    public function setAuthors(array $authors)
+    {
+        $this->authors = $authors;
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -116,8 +126,4 @@ class Article
         $this->authors[] = $author;
     }
 
-    public function getAuthors()
-    {
-        return $this->authors;
-    }
 }

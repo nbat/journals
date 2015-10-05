@@ -5,23 +5,11 @@ namespace Acme\Journals;
 class Category
 {
     protected $id;
-    protected $name = '';
+    protected $name;
     protected $slug;
-
-    protected $articles;
 
     function __construct()
     {
-    }
-
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-
-    public function setArticles($articles)
-    {
-        $this->articles = $articles;
     }
 
     public function getId()
@@ -56,6 +44,6 @@ class Category
 
     public function __toString()
     {
-        return $this->GetName();
+        return (string)$this->GetName();
     }
 }

@@ -16,7 +16,7 @@ class AuthorListModel extends Model
 
     function findAll()
     {
-        $statement = $this->getStorage()->getHandler()->prepare('SELECT id, firstName, secondName, slug FROM authors');
+        $statement = $this->getStorage()->getHandler()->prepare('SELECT id, firstName, lastName, slug FROM authors');
         $statement->execute();
         $this->authors = $statement->fetchAll(PDO::FETCH_CLASS, 'Acme\\Journals\\Author');
         return $this->authors;

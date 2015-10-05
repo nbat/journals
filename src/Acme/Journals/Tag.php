@@ -2,28 +2,14 @@
 
 namespace Acme\Journals;
 
-use ArrayObject;
-
 class Tag
 {
+    protected $id;
     protected $name;
+    protected $slug;
 
-    protected $articles;
-
-    function __construct($name = "")
+    function __construct()
     {
-        $this->setName($name);
-        $this->articles = new ArrayObject(array());
-    }
-
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-
-    public function setArticles($articles)
-    {
-        $this->articles = $articles;
     }
 
     public function getName()
@@ -36,8 +22,18 @@ class Tag
         $this->name = $name;
     }
 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
     public function __toString()
     {
-        return $this->getName();
+        return (string)$this->getName();
     }
 }
