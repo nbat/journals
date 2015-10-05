@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2015 at 04:57 AM
+-- Generation Time: Oct 06, 2015 at 01:15 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -50,6 +50,67 @@ INSERT INTO `articles` (`id`, `title`, `slug`, `shortDescription`, `content`, `p
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `articles2authors`
+--
+
+DROP TABLE IF EXISTS `articles2authors`;
+CREATE TABLE IF NOT EXISTS `articles2authors` (
+  `articleId` int(11) NOT NULL,
+  `authorId` int(11) NOT NULL,
+  PRIMARY KEY (`articleId`,`authorId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `articles2authors`
+--
+
+INSERT INTO `articles2authors` (`articleId`, `authorId`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 4),
+(3, 2),
+(4, 1),
+(5, 4),
+(6, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `articles2tags`
+--
+
+DROP TABLE IF EXISTS `articles2tags`;
+CREATE TABLE IF NOT EXISTS `articles2tags` (
+  `articleId` int(11) NOT NULL,
+  `tagId` int(11) NOT NULL,
+  PRIMARY KEY (`articleId`,`tagId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `articles2tags`
+--
+
+INSERT INTO `articles2tags` (`articleId`, `tagId`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 1),
+(2, 3),
+(2, 5),
+(2, 6),
+(3, 1),
+(4, 2),
+(4, 5),
+(5, 3),
+(5, 4),
+(5, 6),
+(6, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `authors`
 --
 
@@ -57,7 +118,7 @@ DROP TABLE IF EXISTS `authors`;
 CREATE TABLE IF NOT EXISTS `authors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
-  `secondName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
   `slug` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
@@ -66,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `authors` (
 -- Dumping data for table `authors`
 --
 
-INSERT INTO `authors` (`id`, `firstName`, `secondName`, `slug`) VALUES
+INSERT INTO `authors` (`id`, `firstName`, `lastName`, `slug`) VALUES
 (1, 'Ernest', 'Hemingway', 'ernest-hemingway'),
 (2, 'Mark', 'Twain', 'mark-twain'),
 (3, 'Stephen', 'King', 'stephen-king'),
@@ -99,3 +160,31 @@ INSERT INTO `categories` (`id`, `name`, `slug`) VALUES
 (4, 'Hobby', 'hobby'),
 (5, 'Biznes, finanse', 'biznes--finanse'),
 (6, 'Nauki przyrodnicze', 'nauki-przyrodnicze');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `slug` (`slug`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `slug`) VALUES
+(1, 'Jazda konna', 'jazda-konna'),
+(2, 'Php', 'php'),
+(3, 'Baseball', 'baseball'),
+(4, 'Fotografia', 'fotografia'),
+(5, 'Jquery', 'jquery'),
+(6, 'Html5', 'html5');
